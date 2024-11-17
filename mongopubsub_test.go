@@ -2,6 +2,7 @@ package pubsub
 
 import (
 	"context"
+	"os"
 	"testing"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -10,7 +11,7 @@ import (
 func TestMongoPubSub(t *testing.T) {
 	opts := MongoPubSubOpts{
 		Ctx:        context.Background(),
-		Uri:        "",
+		Uri:        os.Getenv("DB_URI"), // MongoDB Atlas provides an easy way to set up a replica set; setting it up locally is more complex
 		DbName:     "demo_pubsub",
 		CollName:   "pubsub",
 		TtlSeconds: 3600, // 1 hour
