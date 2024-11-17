@@ -9,10 +9,11 @@ import (
 
 func TestMongoPubSub(t *testing.T) {
 	opts := MongoPubSubOpts{
-		ctx:      context.Background(),
-		uri:      "",
-		dbName:   "demo_pubsub",
-		collName: "pubsub",
+		Ctx:        context.Background(),
+		Uri:        "",
+		DbName:     "demo_pubsub",
+		CollName:   "pubsub",
+		TtlSeconds: 3600, // 1 hour
 	}
 
 	ps1 := NewMongoPubSub(&opts)
