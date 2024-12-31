@@ -69,6 +69,10 @@ func NewMongoPubSub(opts *MongoPubSubOpts) *MongoPubSub {
 
 // sendToListener sends data to all subscribers of a specific trigger.
 func (ps *MongoPubSub) sendToListener(change bson.M) {
+	if change["operationType"].(string) != "insert" {
+		return
+	}
+
 	// Extract and unmarshal the full document from the change stream
 	fullDocument, err := bson.Marshal(change["fullDocument"])
 	if err != nil {
